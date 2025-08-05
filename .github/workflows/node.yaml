@@ -1,4 +1,4 @@
 package.json
 - name: Install Dependencies
   run: npm install
-  working-directory
+  working-directory:./app

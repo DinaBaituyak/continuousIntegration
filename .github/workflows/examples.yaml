@@ -1,4 +1,4 @@
-name: CI/CD Pipeline - Node.js with Docker and AWS
+name: CI/CD Pipeline - Node.js with docker and aws
 on:
  push:
    branches:
@@ -15,14 +15,14 @@ on:
      # 2. Setup Node.js environment
      - name: Setup Node.js
        uses: actions/setup-node@v4
-     # 3. Install dependencies
-     - name: Install dependencies
-        run: npm Install
+     # 3. install dependencies
+     - name: install dependencies
+       run: npm install
      # 4. Run Test
      - name: Run Test
-        run: npm test
+       run: npm test
   # Build and push Docker image to ECR
-  docker-build-push:
+   docker-build-push:
     name: Build & Push Docker Image
     needs: build-test
     runs-on: ubuntu-test
@@ -30,16 +30,16 @@ on:
       - name: Checkout code
         needs: build-test
   # Configure AWS credentials
-     - name: Configure AWS credentials
-       uses: aws-actions/configure-aws-credentials@v4
-       with:
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
          aws-region: us-east-1
   # Login to ECR
-   - name: Login to Amazon ECR
+     - name: Login to Amazon ECR
        id: Login-ecr
-     uses: aws-actions/amazon-ecr-login@v2
+       uses: aws-actions/amazon-ecr-login@v2
   # Build and tag Docker image
    - name: Build docker Image
       run: |
